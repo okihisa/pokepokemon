@@ -35,8 +35,8 @@ const { dialog, onOpen, onClose } = useDialog();
 
 <template>
   <div>
-    <h1>ポケモンをつかまえる</h1>
-    <p>{{ pokemons.count }} しゅるいのポケモン</p>
+    <h1>つかまえる</h1>
+    <p>{{ pokemons.count }}</p>
     <p>{{ page + 1 }} / {{ maxPage + 1 }} ページ</p>
     <GamifyList>
       <GamifyItem v-for="pokemon in pokemons.results" :key="pokemon.url">
@@ -47,8 +47,8 @@ const { dialog, onOpen, onClose } = useDialog();
     <GamifyDialog
       v-if="dialog"
       id="confirm-catch"
-      title="かくにん"
-      :description="`ほう！　${dialog.name}　にするんじゃな？`"
+      title="Check"
+      :description="`${dialog.name}？`"
       @close="onClose"
     >
       <GamifyList :border="false" direction="horizon">
@@ -67,6 +67,11 @@ const { dialog, onOpen, onClose } = useDialog();
       <GamifyItem>
         <GamifyButton :disabled="!hasNext" @click="onNext">つぎへ</GamifyButton>
       </GamifyItem>
+      <GamifyItem
+        ><RouterLink to="{{ ../$(route.param.name) }}"
+          >捕まえるのをやめる</RouterLink
+        ></GamifyItem
+      >
     </GamifyList>
   </div>
 </template>
