@@ -22,14 +22,12 @@ const { dialog, onOpen, onClose } = useDialog();
 
 <template>
   <div>
-    <h1>あたらしくはじめる</h1>
-    <p>では　はじめに　きみの　なまえを　おしえて　もらおう！</p>
-    <form @submit.prevent>
+    <h1>新規参入！</h1>
+    <p>はじめに貴方の名前を教えてください。</p>
+    <from @submit.prevent>
       <div class="item">
-        <label for="name">なまえ</label>
-        <span id="name-description"
-          >とくていの　もじは　とりのぞかれるぞ！</span
-        >
+        <label for="name">名前</label
+        ><span id="name-description">一部の文字は都合により使えません</span>
         <input
           id="name"
           v-model="trainerName"
@@ -38,22 +36,27 @@ const { dialog, onOpen, onClose } = useDialog();
         />
       </div>
       <GamifyButton type="button" :disabled="!valid" @click="onOpen(true)"
-        >けってい</GamifyButton
+        >きまった！</GamifyButton
       >
-    </form>
+    </from>
+
+    <GamifyItem
+      ><RouterLink to="/">さいしょのがめんにもどる</RouterLink></GamifyItem
+    >
+
     <GamifyDialog
       v-if="dialog"
       id="confirm-submit"
       title="かくにん"
-      :description="`ふむ・・・　きみは　${safeTrainerName}　と　いうんだな！`"
+      :description="`${safeTrainerName} というなまえで確かかな？`"
       @close="onClose"
     >
-      <GamifyList :border="false" direction="horizon">
+      <GamifyList :border="false" description="horizon">
         <GamifyItem>
-          <GamifyButton @click="onClose">いいえ</GamifyButton>
+          <GamifyButton @click="onClose">いいややっぱりちがいます</GamifyButton>
         </GamifyItem>
         <GamifyItem>
-          <GamifyButton @click="onSubmit">はい</GamifyButton>
+          <GamifyButton @click="onSubmit">そうです</GamifyButton>
         </GamifyItem>
       </GamifyList>
     </GamifyDialog>
