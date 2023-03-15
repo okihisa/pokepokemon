@@ -324,5 +324,4 @@ https://pokeapi.co/docs/v2 に準じる
 ##### 200
 
 [DeleteObjectCommandOutput](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/interfaces/deleteobjectcommandoutput.html)
-#   p o k e p o k e m o n  
- 
+#
