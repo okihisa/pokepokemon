@@ -7,8 +7,12 @@ const { data: trainers } = await useTrainers();
     <h1>つづきからはじめる</h1>
     <GamifyList>
       <GamifyItem v-for="trainer in trainers" :key="trainer">
-        <NuxtLink :to="`/trainer/${trainer}`">{{ trainer }}</NuxtLink>
+        <NuxtLink :to="`/trainer/${trainer}`"> {{ trainer }}</NuxtLink>
       </GamifyItem>
     </GamifyList>
+
+    <GamifyItem
+      ><RouterLink to="/">さいしょのがめんにもどる</RouterLink>
+    </GamifyItem>
   </div>
 </template>
