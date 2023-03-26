@@ -29,7 +29,6 @@ const onCatch = async (pokemon) => {
   router.push(`/trainer/${route.params.name}`);
 };
 const { dialog, onOpen, onClose } = useDialog();
-const { data: trainers } = await useTrainers();
 </script>
 
 <template>
@@ -60,7 +59,7 @@ const { data: trainers } = await useTrainers();
       <GamifyItem>
         <GamifyButton :disabled="!hasNext" @click="onNext">つぎへ</GamifyButton>
       </GamifyItem>
-      <GamifyItem><NuxtLink :to="`/trainer/${trainer}`">捕まえるのをやめる</NuxtLink></GamifyItem>
+      <GamifyItem><RouterLink to="`${config.backendOrigin}/api/trainer/${route.params.name}">捕まえるのをやめる</RouterLink></GamifyItem>
     </GamifyList>
   </div>
 </template>
