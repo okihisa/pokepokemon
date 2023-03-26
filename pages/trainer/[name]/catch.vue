@@ -23,14 +23,13 @@ const onNext = async () => {
 const onCatch = async (pokemon) => {
   const response = await fetch(
     `${config.backendOrigin}/api/trainer/${route.params.name}/pokemon/${pokemon.name}`,
-    {
-      method: "PUT",
-    }
+    { method: "PUT", }
   );
   if (!response.ok) return;
   router.push(`/trainer/${route.params.name}`);
 };
 const { dialog, onOpen, onClose } = useDialog();
+const { data: trainers } = await useTrainers();
 </script>
 
 <template>
@@ -44,13 +43,7 @@ const { dialog, onOpen, onClose } = useDialog();
         <GamifyButton @click="onOpen(pokemon)">つかまえる</GamifyButton>
       </GamifyItem>
     </GamifyList>
-    <GamifyDialog
-      v-if="dialog"
-      id="confirm-catch"
-      title="Check"
-      :description="`${dialog.name}？`"
-      @close="onClose"
-    >
+    <GamifyDialog v-if="dialog" id="confirm-catch" title="Check" :description="`${dialog.name}？`" @close="onClose">
       <GamifyList :border="false" direction="horizon">
         <GamifyItem>
           <GamifyButton @click="onClose">いいえ</GamifyButton>
@@ -67,11 +60,7 @@ const { dialog, onOpen, onClose } = useDialog();
       <GamifyItem>
         <GamifyButton :disabled="!hasNext" @click="onNext">つぎへ</GamifyButton>
       </GamifyItem>
-      <GamifyItem
-        ><RouterLink to="{{ ../$(route.param.name) }}"
-          >捕まえるのをやめる</RouterLink
-        ></GamifyItem
-      >
+      <GamifyItem><NuxtLink :to="`/trainer/${trainer}`">捕まえるのをやめる</NuxtLink></GamifyItem>
     </GamifyList>
   </div>
 </template>
