@@ -28,6 +28,9 @@ const onCatch = async (pokemon) => {
   if (!response.ok) return;
   router.push(`/trainer/${route.params.name}`);
 };
+const backTrainerlist = async () => {
+  router.push(`/trainer/${route.params.name}`);
+};
 const { dialog, onOpen, onClose } = useDialog();
 </script>
 
