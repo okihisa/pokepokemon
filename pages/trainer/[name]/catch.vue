@@ -59,7 +59,10 @@ const { dialog, onOpen, onClose } = useDialog();
       <GamifyItem>
         <GamifyButton :disabled="!hasNext" @click="onNext">つぎへ</GamifyButton>
       </GamifyItem>
-      <GamifyItem><RouterLink to="`${config.backendOrigin}/api/trainer/${route.params.name}">捕まえるのをやめる</RouterLink></GamifyItem>
+      <GamifyItem>
+        <GamifyButton @click="backTrainerlist">捕まえるのをやめる</GamifyButton>
+      </GamifyItem><br>
+      <GamifyItem><RouterLink to="/traier/:trainer">捕まえるのをやめる</RouterLink></GamifyItem>
     </GamifyList>
   </div>
 </template>
