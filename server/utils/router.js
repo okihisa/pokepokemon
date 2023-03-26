@@ -89,8 +89,8 @@ router.put(
         name,
         sprites: { front_default },
       } = pokemon;
-      trainer.pokemon.push({
-        id: (trainer.pokemons[trainer.pokemon.length - 1]?.id ?? 0) + 1,
+      trainer.pokemons.push({
+        id: (trainer.pokemons[trainer.pokemons.length - 1]?.id ?? 0) + 1,
         nickname: "",
         order,
         name,
