@@ -87,6 +87,8 @@ router.put(
       const {
         order,
         name,
+        height,
+        wight,
         sprites: { front_default },
       } = pokemon;
       trainer.pokemons.push({
@@ -94,9 +96,11 @@ router.put(
         nickname: "",
         order,
         name,
+        height,
+        weight,
         sprites: { front_default },
       });
-      const result = await upsertTrainer(trainerName, { pokemons: [pokemon] });
+      const result = await upsertTrainer(trainerName, trainer);
       res.status(result["$metadata"].httpStatusCode).send(result);
     } catch (err) {
       next(err);
