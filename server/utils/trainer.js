@@ -34,6 +34,7 @@ export const findTrainer = async (name) => {
     })
   );
   const trainer = JSON.parse(await streamToString(object.Body));
+  console.log(trainer);
   return trainer;
 };
 
@@ -46,6 +47,7 @@ export const upsertTrainer = async (name, trainer) => {
       Body: JSON.stringify({ name: "", pokemons: [], ...trainer }),
     })
   );
+  console.log(trainer);
   return result;
 };
 
