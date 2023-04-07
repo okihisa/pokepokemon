@@ -43,7 +43,6 @@ const { dialog, onOpen, onClose } = useDialog();
     <p>{{ page + 1 }} / {{ maxPage + 1 }} ページ</p>
     <GamifyList>
       <GamifyItem v-for="pokemon in pokemons.results" :key="pokemon.url">
-        <img :src="pokemon.sprites.front_default" />
         <span class="pokemon-name">{{ pokemon.name }}</span>
         <GamifyButton @click="onOpen(pokemon)">つかまえる</GamifyButton>
       </GamifyItem>
