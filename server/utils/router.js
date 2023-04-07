@@ -55,9 +55,10 @@ router.get("/trainer/:trainerName", async (req, res, next) => {
 router.post("/trainer/:trainerName", async (req, res, next) => {
   try {
     const { trainerName } = req.params;
-    const trainers = await findTrainers();
-    if (!trainers.some(({ key }) => key === `${trainerName}.json`))
-      return res.sendStatus(404);
+    /* const trainers = await findTrainers(); */
+    const trainer = await findTrainer(trainerName);
+    /* if (!trainers.some(({ key }) => key === `${trainerName}.json`)) */
+    if (!Object.keys(trainer).length) return res.sendStatus(404);
     const result = await upsertTrainer(trainerName, req.body);
     res.status(result["$metadata"].httpStatusCode).send(result);
   } catch (err) {
@@ -88,7 +89,7 @@ router.put(
         order,
         name,
         height,
-        wight,
+        weight,
         sprites: { front_default },
       } = pokemon;
       trainer.pokemons.push({
@@ -117,9 +118,10 @@ router.delete(
       const { trainerName, pokemonId } = req.params;
       const trainer = await findTrainer(trainerName);
       const index = trainer.pokemons.findIndex(
-        (pokemon) => String(pokemon.id) === pokemonId
+        (pokemon) => String(pokemon.id) == pokemonId
       );
-      trainer.pokemon.splice(index, 1);
+      trainer.pokemons.splice(index, 1);
+      console.log(pokemonId);
       const result = await upsertTrainer(trainerName, trainer);
       res.status(result["$metadata"].httpStatusCode).send(result);
     } catch (err) {
