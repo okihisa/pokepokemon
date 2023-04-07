@@ -22,12 +22,12 @@ const { dialog, onOpen, onClose } = useDialog();
 
 <template>
   <div>
-    <h1>新規参入！</h1>
-    <p>はじめに貴方の名前を教えてください。</p>
-    <from @submit.prevent>
+    <h1>トレーナーになるます！</h1>
+    <p>はじめにあなたの名前を教えてください。</p>
+    <form @submit.prevent>
       <div class="item">
         <label for="name">名前</label
-        ><span id="name-description">一部の文字は都合により使えません</span>
+        ><span id="name-description">一部の文字は都合により消えます</span>
         <input
           id="name"
           v-model="trainerName"
@@ -38,7 +38,7 @@ const { dialog, onOpen, onClose } = useDialog();
       <GamifyButton type="button" :disabled="!valid" @click="onOpen(true)"
         >きまった！</GamifyButton
       >
-    </from>
+    </form>
 
     <GamifyItem
       ><RouterLink to="/">さいしょのがめんにもどる</RouterLink></GamifyItem
@@ -48,7 +48,7 @@ const { dialog, onOpen, onClose } = useDialog();
       v-if="dialog"
       id="confirm-submit"
       title="かくにん"
-      :description="`${safeTrainerName} というなまえで確かかな？`"
+      :description="`${safeTrainerName} というなまえで良い？`"
       @close="onClose"
     >
       <GamifyList :border="false" description="horizon">
