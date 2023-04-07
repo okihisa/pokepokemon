@@ -20,15 +20,17 @@ const onNext = async () => {
   page.value++;
   await refresh();
 };
+const backTrainerlist = async () => {
+  router.push(`/trainer/${route.params.name}`);
+};
 const onCatch = async (pokemon) => {
   const response = await fetch(
     `${config.backendOrigin}/api/trainer/${route.params.name}/pokemon/${pokemon.name}`,
-    { method: "PUT", }
+    {
+      method: "PUT",
+    }
   );
   if (!response.ok) return;
-  router.push(`/trainer/${route.params.name}`);
-};
-const backTrainerlist = async () => {
   router.push(`/trainer/${route.params.name}`);
 };
 const { dialog, onOpen, onClose } = useDialog();
@@ -45,7 +47,13 @@ const { dialog, onOpen, onClose } = useDialog();
         <GamifyButton @click="onOpen(pokemon)">つかまえる</GamifyButton>
       </GamifyItem>
     </GamifyList>
-    <GamifyDialog v-if="dialog" id="confirm-catch" title="Check" :description="`${dialog.name}？`" @close="onClose">
+    <GamifyDialog
+      v-if="dialog"
+      id="confirm-catch"
+      title="Check"
+      :description="`${dialog.name}？`"
+      @close="onClose"
+    >
       <GamifyList :border="false" direction="horizon">
         <GamifyItem>
           <GamifyButton @click="onClose">いいえ</GamifyButton>
@@ -63,9 +71,10 @@ const { dialog, onOpen, onClose } = useDialog();
         <GamifyButton :disabled="!hasNext" @click="onNext">つぎへ</GamifyButton>
       </GamifyItem>
       <GamifyItem>
-        <GamifyButton @click="backTrainerlist">捕まえるのをやめる</GamifyButton>
-      </GamifyItem><br>
-      <GamifyItem><RouterLink to="/traier/:trainer">捕まえるのをやめる</RouterLink></GamifyItem>
+        <GamifyButton @click="backTrainerlist()"
+          >捕まえるのをやめる</GamifyButton
+        >
+      </GamifyItem>
     </GamifyList>
   </div>
 </template>
